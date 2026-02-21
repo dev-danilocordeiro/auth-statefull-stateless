@@ -1,0 +1,88 @@
+version: "3.9"
+
+services:
+
+  stateless-auth-db:
+    image: postgres:latest
+    container_name: stateless-auth-db
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: auth-db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - stateless_auth_data:/var/lib/postgresql
+    networks:
+      - auth-bridge
+    restart: unless-stopped
+
+  stateful-auth-db:
+    image: postgres:latest
+    container_name: stateful-auth-db
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_DB: auth-db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - stateful_auth_data:/var/lib/postgresql
+    networks:
+      - auth-bridge
+    restart: unless-stopped
+
+  token-redis:
+    image: redis:latest
+    container_name: token-redis
+    ports:
+      - "6380:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes
+    networks:
+      - auth-bridge
+    restart: unless-stopped
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: pgadmin
+    ports:
+      - "5050:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    depends_on:
+      - stateless-auth-db
+      - stateful-auth-db
+    networks:
+      - auth-bridge
+    restart: unless-stopped
+
+  redis-insight:
+    image: redis/redisinsight:latest
+    container_name: redis-insight
+    ports:
+      - "5540:5540"
+    volumes:
+      - redis_insight_data:/data
+    depends_on:
+      - token-redis
+    networks:
+      - auth-bridge
+    restart: unless-stopped
+
+
+networks:
+  auth-bridge:
+    driver: bridge
+
+
+volumes:
+  stateless_auth_data:
+  stateful_auth_data:
+  redis_data:
+  pgadmin_data:
+  redis_insight_data:
