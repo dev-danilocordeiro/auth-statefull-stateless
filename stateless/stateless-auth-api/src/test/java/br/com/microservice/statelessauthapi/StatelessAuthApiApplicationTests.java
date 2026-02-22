@@ -1,4 +1,4 @@
-package br.com.microservice.stateless_auth_api;
+package br.com.microservice.statelessauthapi;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

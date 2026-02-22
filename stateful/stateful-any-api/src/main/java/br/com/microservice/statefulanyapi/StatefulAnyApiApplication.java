@@ -1,13 +1,13 @@
-package br.com.microservice.stateless_auth_api;
+package br.com.microservice.statefulanyapi;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class StatelessAuthApiApplication {
+public class StatefulAnyApiApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(StatelessAuthApiApplication.class, args);
+		SpringApplication.run(StatefulAnyApiApplication.class, args);
 	}
 
 }

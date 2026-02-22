@@ -1,10 +1,10 @@
-package br.com.microservice.stateful_any_api;
+package br.com.microservice.statefulauthapi;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class StatefulAnyApiApplicationTests {
+class StatefulAuthApiApplicationTests {
 
 	@Test
 	void contextLoads() {

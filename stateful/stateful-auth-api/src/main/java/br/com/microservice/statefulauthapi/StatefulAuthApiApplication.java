@@ -1,4 +1,4 @@
-package br.com.microservice.stateful_auth_api;
+package br.com.microservice.statefulauthapi;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
