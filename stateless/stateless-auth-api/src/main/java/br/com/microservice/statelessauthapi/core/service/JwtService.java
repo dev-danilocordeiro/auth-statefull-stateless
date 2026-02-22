@@ -68,7 +68,7 @@ public class JwtService {
         }
     }
 
-    public String extractToken(String token) {
+    private String extractToken(String token) {
         if(isEmpty(token)) {
             throw new ValidationException("The access token was not informed.");
         }
