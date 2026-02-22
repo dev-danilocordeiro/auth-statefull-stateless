@@ -73,6 +73,56 @@ services:
     networks:
       - auth-bridge
     restart: unless-stopped
+  stateless-auth-api:
+    build: './stateless/stateless-auth-api'
+    container_name: stateless-auth-api
+    depends_on:
+      - stateless-auth-db
+    ports:
+      - "8080:8080"
+    environment:
+      PORT: 8080
+      DB_HOST: stateless-auth-db
+      DB_PORT: 5432
+      DB_NAME: auth-db
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+    networks:
+      - auth-bridge
+  stateless-any-api:
+    build: './stateless/stateless-any-api'
+    container_name: stateless-any-api
+    ports:
+      - "8081:8081"
+    environment:
+      PORT: 8081
+    networks:
+      - auth-bridge
+  stateful-auth-api:
+    build: './stateful/stateful-auth-api'
+    container_name: stateful-auth-api
+    depends_on:
+      - stateful-auth-db
+    ports:
+      - "8082:8082"
+    environment:
+      PORT: 8082
+      DB_HOST: stateful-auth-db
+      DB_PORT: 5432
+      DB_NAME: auth-db
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+    networks:
+      - auth-bridge
+  stateful-any-api:
+    build: './stateful/stateful-any-api'
+    container_name: stateful-any-api
+    ports:
+      - "8083:8083"
+    environment:
+      PORT: 8083
+    networks:
+      - auth-bridge
 
 
 networks:
