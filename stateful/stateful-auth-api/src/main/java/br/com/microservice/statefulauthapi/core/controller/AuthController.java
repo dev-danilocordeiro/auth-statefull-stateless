@@ -37,7 +37,7 @@ public class AuthController {
         return response;
     }
 
-    @GetMapping
+    @GetMapping("user")
     public AuthUserResponse getAuthenticatedUser(@RequestHeader String accessToken) {
         return authService.getAuthenticatedUser(accessToken);
     }
