@@ -22,3 +22,7 @@ spring:
 
 server:
   port: ${PORT:8082}
+
+redis:
+  host: ${HOST:localhost}
+  port: ${PORT:6380}
